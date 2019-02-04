@@ -1,10 +1,12 @@
 connection: "thelook"
+# label: "The Look"
 
 include: "*.view.lkml"                       # include all views in this project
 # include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
 explore: order_items {
-  label: "1) Orders, Items, and Users"
+  group_label: "The Look"
+#   label: "1) Orders, Items, and Users"
   join: orders {
     type: left_outer
     sql_on: ${order_items.order_id} = ${orders.id} ;;
@@ -25,4 +27,8 @@ explore: order_items {
     sql_on: ${orders.user_id} = ${users.id};;
     relationship: many_to_one
   }
+}
+explore: users {
+  group_label: "The Look"
+
 }
