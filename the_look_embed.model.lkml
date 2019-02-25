@@ -3,6 +3,11 @@ connection: "thelook"
 include: "*.view.lkml"                       # include all views in this project
 # include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
+access_grant: can_see_pii {
+  user_attribute: department
+  allowed_values: ["Human Resources", "Executives"]
+}
+
 explore: order_items {
   access_filter: {
     field: products.brand

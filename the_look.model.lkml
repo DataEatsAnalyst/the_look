@@ -4,6 +4,11 @@ connection: "thelook"
 include: "*.view.lkml"                       # include all views in this project
 # include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
+access_grant: can_see_pii {
+  user_attribute: department
+  allowed_values: ["Human Resources", "Executives"]
+}
+
 explore: order_items {
   join: orders {
     type: left_outer
@@ -28,8 +33,8 @@ explore: order_items {
 }
 
 explore: users {
-  access_filter: {
-    field: country
-    user_attribute: department
-  }
+  # access_filter: {
+  #   field: country
+  #   user_attribute: department
+  # }
 }

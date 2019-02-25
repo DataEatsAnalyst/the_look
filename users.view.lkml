@@ -48,6 +48,7 @@ view: users {
   }
 
   dimension: gender {
+    required_access_grants: [can_see_pii]
     type: string
     sql: ${TABLE}.gender ;;
   }
@@ -70,5 +71,27 @@ view: users {
   measure: count {
     type: count
     drill_fields: [id, first_name, last_name, events.count, orders.count]
+  }
+
+  measure: female_count {
+    type: count
+    filters: {
+      field: gender
+      value: "f"
+    }
+    drill_fields: [detail*]
+  }
+
+  measure: male_count {
+    type: count
+    filters: {
+      field: gender
+      value: "m"
+    }
+    drill_fields: [detail*]
+  }
+
+  set: detail {
+    fields: [id, first_name, last_name, gender, age, events.count, orders.count]
   }
 }
