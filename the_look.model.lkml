@@ -27,4 +27,9 @@ explore: order_items {
   }
 }
 
-explore: users {}
+explore: users {
+  access_filter: {
+    field: country
+    user_attribute: department
+  }
+}
