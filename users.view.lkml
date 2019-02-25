@@ -91,6 +91,12 @@ view: users {
     drill_fields: [detail*]
   }
 
+  measure: gender_count {
+    type: count_distinct
+    sql: ${gender} ;;
+    drill_fields: [gender]
+  }
+
   set: detail {
     fields: [id, first_name, last_name, gender, age, events.count, orders.count]
   }
