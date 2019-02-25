@@ -5,8 +5,8 @@ include: "*.view.lkml"                       # include all views in this project
 # include: "my_dashboard.dashboard.lookml"   # include a LookML dashboard called my_dashboard
 
 access_grant: can_see_pii {
-  user_attribute: department
-  allowed_values: ["Human Resources", "Executives"]
+  user_attribute: can_see_pii
+  allowed_values: ["yes"]
 }
 
 explore: order_items {
