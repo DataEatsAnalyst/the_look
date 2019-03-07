@@ -10,6 +10,7 @@ access_grant: can_see_pii {
 }
 
 explore: order_items {
+  sql_always_where: ${products.brand} = 'Allegra K' ;;
   join: orders {
     type: left_outer
     sql_on: ${order_items.order_id} = ${orders.id} ;;
@@ -32,9 +33,4 @@ explore: order_items {
   }
 }
 
-explore: users {
-  # access_filter: {
-  #   field: country
-  #   user_attribute: department
-  # }
-}
+explore: users {}

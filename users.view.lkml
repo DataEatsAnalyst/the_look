@@ -68,6 +68,11 @@ view: users {
     sql: ${TABLE}.zip ;;
   }
 
+  dimension: looker_logo {
+    sql: 1 ;;
+    html: <img src="https://docs.looker.com/assets/images/Looker_Logo_Purple.png" /> ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [id, first_name, last_name, events.count, orders.count]
