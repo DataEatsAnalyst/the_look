@@ -27,14 +27,12 @@ view: orders {
   }
 
   dimension: user_id {
-    view_label: "Crazy Label"
     type: number
     # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
 
   measure: count {
-    view_label: "Crazy Label"
     label: "Order Count"
     type: count
     drill_fields: [id, users.id, users.first_name, users.last_name, order_items.count]
