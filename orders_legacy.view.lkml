@@ -1,5 +1,5 @@
-view: orders {
-  sql_table_name: demo_db.orders ;;
+view: orders_legacy {
+  sql_table_name: public_db.orders ;;
 
   dimension: id {
     primary_key: yes

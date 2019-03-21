@@ -42,4 +42,15 @@ view: order_items {
     type: count
     drill_fields: [id, orders.id, inventory_items.id]
   }
+
+  measure: total_sale_price {
+    type: sum
+    sql: ${sale_price} ;;
+    value_format_name: usd
+     html:
+       <p style="color: red; font-size: 80px">{{ rendered_value }} </p> ;;
+    # html:
+    #   <p style="color: red; font-size: 40px">{{ _field._name }} </p>
+    #   <p style="color: red; font-size: 80px">{{ rendered_value }} </p> ;;
+  }
 }
