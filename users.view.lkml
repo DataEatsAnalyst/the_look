@@ -13,11 +13,13 @@ view: users {
   }
 
   dimension: city {
+    group_label: "Address"
     type: string
     sql: ${TABLE}.city ;;
   }
 
   dimension: country {
+    group_label: "Address"
     type: string
     map_layer_name: countries
     sql: ${TABLE}.country ;;
@@ -38,44 +40,48 @@ view: users {
   }
 
   dimension: email {
+    required_access_grants: [can_see_pii]
     type: string
     sql: ${TABLE}.email ;;
   }
 
   dimension: first_name {
+    required_access_grants: [can_see_pii]
     type: string
     sql: ${TABLE}.first_name ;;
   }
 
   dimension: gender {
-    required_access_grants: [can_see_pii]
     type: string
     sql: ${TABLE}.gender ;;
   }
 
   dimension: last_name {
+    required_access_grants: [can_see_pii]
     type: string
     sql: ${TABLE}.last_name ;;
   }
 
   dimension: state {
+    group_label: "Address"
     type: string
     sql: ${TABLE}.state ;;
   }
 
   dimension: zip {
+    group_label: "Address"
     type: zipcode
     sql: ${TABLE}.zip ;;
   }
 
-  dimension: looker_logo {
-    sql: 1 ;;
-    html: <img src="https://docs.looker.com/assets/images/Looker_Logo_Purple.png" /> ;;
-  }
+  # dimension: looker_logo {
+  #   sql: 1 ;;
+  #   html: <img src="https://docs.looker.com/assets/images/Looker_Logo_Purple.png" /> ;;
+  # }
 
   measure: count {
     type: count
-    drill_fields: [id, first_name, last_name, events.count, orders.count]
+    drill_fields: [detail*]
   }
 
   measure: female_count {
@@ -96,13 +102,19 @@ view: users {
     drill_fields: [detail*]
   }
 
-  measure: gender_count {
-    type: count_distinct
-    sql: ${gender} ;;
-    drill_fields: [gender]
+  measure: percent_female {
+    type: number
+    sql: 1.0 * ${female_count}/NULLIF(${count},0) ;;
+    value_format_name: percent_1
+  }
+
+  measure: percent_male {
+    type: number
+    sql: 1.0 * ${male_count}/NULLIF(${count},0) ;;
+    value_format_name: percent_1
   }
 
   set: detail {
-    fields: [id, first_name, last_name, gender, age, events.count, orders.count]
+    fields: [id, email, first_name, last_name, gender, age, events.count, orders.count]
   }
 }
